@@ -50,7 +50,7 @@ flowchart TB
         style M4 fill:#fff5e6
     end
 
-    subgraph Output["5. Final Results"]
+    subgraph Output["5 Final Results"]
         direction TB
         M1 & M2 & M3 & M4 --> R1["Model Performance\nMetrics"]
         M1 & M2 & M3 & M4 --> R2["Significant\nInteractions"]
