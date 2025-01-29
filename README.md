@@ -6,7 +6,7 @@ A machine learning framework for predicting cell-cell interactions during oocyte
 
 ```mermaid
 flowchart TB
-    subgraph Input["1. Input Data"]
+    subgraph Input["1 Input Data"]
         direction LR
         A1["Cell Type 1\nGene Expression"] --> FP
         A2["Cell Type 2\nGene Expression"] --> FP
@@ -14,7 +14,7 @@ flowchart TB
         style A2 fill:#f9e6e6
     end
 
-    subgraph Feature["2. Feature Engineering"]
+    subgraph Feature["2 Feature Engineering"]
         direction TB
         FP["Feature Preparation"] --> F1["Basic Features"]
         FP --> F2["Interaction Features"]
@@ -27,7 +27,7 @@ flowchart TB
         style CM fill:#e6f3ff
     end
 
-    subgraph Model["3. Model Training"]
+    subgraph Model["3 Model Training"]
         direction TB
         CM --> RF["Random Forest Model"]
         CM --> XGB["XGBoost Model"]
@@ -38,7 +38,7 @@ flowchart TB
         style EP fill:#e6ffe6
     end
 
-    subgraph Evaluation["4. Model Evaluation"]
+    subgraph Evaluation["4 Model Evaluation"]
         direction TB
         EP --> M1["ROC Curve\nAUC Score"]
         EP --> M2["PR Curve\nPrecision/Recall"]
