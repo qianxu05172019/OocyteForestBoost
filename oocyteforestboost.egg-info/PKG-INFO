@@ -1,3 +1,38 @@
+Metadata-Version: 2.2
+Name: oocyteforestboost
+Version: 0.1.0
+Summary: A machine learning framework for predicting cell-cell interactions during oocyte maturation using Random Forest and XGBoost
+Home-page: https://github.com/qianxu05172019/OocyteForestBoost
+Author: Qian Xu
+Author-email: qianxu0517@gmail.com
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Science/Research
+Classifier: Topic :: Scientific/Engineering :: Bio-Informatics
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+Requires-Dist: numpy>=1.21.0
+Requires-Dist: pandas>=1.3.0
+Requires-Dist: scikit-learn>=0.24.2
+Requires-Dist: xgboost>=1.4.2
+Requires-Dist: scipy>=1.7.0
+Requires-Dist: statsmodels>=0.13.0
+Requires-Dist: seaborn>=0.11.2
+Requires-Dist: matplotlib>=3.4.2
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
+
 # OocyteForestBoost
 
 A machine learning framework for predicting cell-cell interactions during oocyte maturation using ensemble methods (Random Forest and XGBoost).
@@ -58,8 +93,11 @@ flowchart TB
         style R2 fill:#e6e6ff
     end
 
+    %% 整体样式设置
     classDef section fill:#fff,stroke:#333,stroke-width:2px
     class Input,Feature,Model,Evaluation,Output section
+    
+    %% 连接线样式
     linkStyle default stroke:#666,stroke-width:2px
 ```
 
@@ -74,14 +112,6 @@ flowchart TB
 
 ## Installation
 
-You can install OocyteForestBoost directly from PyPI:
-
-```bash
-pip install oocyteforestboost
-```
-
-Or install from source:
-
 ```bash
 # Clone the repository
 git clone https://github.com/qianxu05172019/OocyteForestBoost.git
@@ -89,51 +119,36 @@ git clone https://github.com/qianxu05172019/OocyteForestBoost.git
 # Navigate to the directory
 cd OocyteForestBoost
 
-# Install from source
-pip install .
+# Install required packages
+pip install -r requirements.txt
 ```
 
 ## Quick Start
 
 ```python
 from oocyteforestboost.predictor import CellInteractionPredictor
-import numpy as np
-
-# Generate example data (replace with your own data)
-n_samples = 1000
-n_features = 100
-cell_type1_expression = np.random.normal(0, 1, (n_samples, n_features))
-cell_type2_expression = np.random.normal(0, 1, (n_samples, n_features))
 
 # Initialize predictor
 predictor = CellInteractionPredictor()
 
-# Prepare features
-X = predictor.prepare_features(cell_type1_expression, cell_type2_expression)
-
-# If you have interaction labels (for training)
-y = np.random.binomial(1, 0.5, n_samples)  # Replace with your actual labels
+# Prepare your data
+# X_train: gene expression data
+# y_train: interaction labels
 
 # Train models
-predictor.train_models(X, y)
+predictor.train_models(X_train, y_train)
 
 # Make predictions
-predictions = predictor.predict_proba(X)
+predictions = predictor.predict_proba(X_test)
 
-# Identify significant interactions
-significant_interactions = predictor.apply_fdr_control(predictions)
-
-# Evaluate model performance
-eval_results = predictor.evaluate_models(X, y)
-
-# Visualize results
-predictor.plot_evaluation_metrics(eval_results)
+# Evaluate results
+eval_results = predictor.evaluate_models(X_test, y_test)
 ```
 
 ## Input Data Format
 
 The predictor expects gene expression data in the following format:
-- Gene expression matrices for two cell types (numpy arrays)
+- Gene expression matrices for two cell types
 - Each row represents a sample
 - Each column represents a gene
 - Labels should be binary (0: no interaction, 1: interaction)
